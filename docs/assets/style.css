@@ -229,6 +229,83 @@ h1, h2 {
   margin-bottom: 12px;
 }
 
+.promo {
+  margin: 12px 0 28px;
+}
+
+.promo-card {
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 2fr 1fr;
+}
+
+.promo-text h2 {
+  margin: 4px 0 10px;
+}
+
+.promo-text p {
+  margin: 0 0 12px;
+}
+
+.promo-list {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  color: var(--ink);
+  display: grid;
+  gap: 8px;
+}
+
+.promo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.promo-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 2px 0 4px;
+}
+
+.stat-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0;
+}
+
+@media (max-width: 840px) {
+  .promo-card {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
