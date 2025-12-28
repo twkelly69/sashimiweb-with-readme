@@ -185,6 +185,62 @@ def build_detail(restaurant: Restaurant) -> str:
 
     price_block = f"<span class='pill'>{html_escape(restaurant.price)}</span>" if restaurant.price else ""
 
+    value_highlights: list[str] = []
+    if restaurant.rating:
+        value_highlights.append(
+            f"<li><strong>{html_escape(restaurant.rating)} ★</strong> · {html_escape(restaurant.review_count or '近期評論')} 則真實口碑，適合放大曝光。</li>"
+        )
+    if restaurant.category:
+        value_highlights.append(
+            f"<li>依照「{html_escape(restaurant.category)}」標籤，鎖定對味客群，減少無效廣告浪費。</li>"
+        )
+    if restaurant.services:
+        joined_services = "、".join(html_escape(service) for service in restaurant.services[:3])
+        value_highlights.append(
+            f"<li>用「{joined_services}」等服務情境，客製化導購腳本，提升轉單率。</li>"
+        )
+    if restaurant.price:
+        value_highlights.append(
+            f"<li>以客單 {html_escape(restaurant.price)} 為目標，推薦適合的再行銷與回訪提醒節奏。</li>"
+        )
+
+    if not value_highlights:
+        value_highlights.append("<li>專人協助設定行銷流程，快速上線導流與留客工具。</li>")
+
+    growth_section = f"""
+      <section class='promo'>
+        <div class='promo-card'>
+          <div class='promo-text'>
+            <p class='eyebrow'>合作提案</p>
+            <h2>為 {html_escape(restaurant.name)} 打造的營運成長方案</h2>
+            <p class='muted'>把門市資訊轉換成吸引人的故事：用評論、服務型態與價格帶，為你量身設計廣告素材、回訪訊息與會員培育流程。</p>
+            <ul class='promo-list'>{''.join(value_highlights)}</ul>
+            <div class='promo-actions'>
+              <a class='button primary' href='mailto:hello@example.com?subject={html_escape(restaurant.name)}%20合作諮詢'>預約 30 分鐘諮詢</a>
+              <a class='button secondary' href='{html_escape(restaurant.map_url or "../../index.html")}' target='_blank' rel='noopener'>查看門市定位</a>
+            </div>
+          </div>
+          <div class='promo-panel'>
+            <div class='stat'>
+              <div class='stat-label'>招牌亮點</div>
+              <div class='stat-value'>{html_escape(restaurant.category or "人氣餐廳")}</div>
+              <p class='stat-note'>我們會根據熱門品項與客群關鍵字，產出投放文案與著陸頁 A/B 測試。</p>
+            </div>
+            <div class='stat'>
+              <div class='stat-label'>口碑力</div>
+              <div class='stat-value'>{html_escape(restaurant.review_count or "新開店")}</div>
+              <p class='stat-note'>將評論轉成社群推薦語，並建立「到店後」滿意度追蹤流程。</p>
+            </div>
+            <div class='stat'>
+              <div class='stat-label'>營運服務</div>
+              <div class='stat-value'>{html_escape('、'.join(restaurant.services) or '彈性體驗')}</div>
+              <p class='stat-note'>針對營業時段與服務模式自動提醒，減少空檔、放大尖峰營收。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    """
+
     return f"""
     <main class='detail'>
       <a class='back-link' href='../../index.html'>← 回到餐廳列表</a>
@@ -201,6 +257,7 @@ def build_detail(restaurant: Restaurant) -> str:
         </div>
       </header>
       {hero}
+      {growth_section}
       <section>
         <h2>服務</h2>
         {services_block}
