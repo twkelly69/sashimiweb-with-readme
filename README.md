@@ -1,20 +1,12 @@
-# sashimiweb-with-readme
+# Agnes
 
-這個專案會把 `restaurant_119HW.csv` 內的餐廳資料轉成 GitHub Pages 的靜態網站，每家餐廳都有自己的獨立頁面。
+A landing page template.
 
-## 如何產生網站
+* [Getting started](#getting-started)
 
-1. 安裝 Python 3.11+（系統已內建，不需要額外套件）。
-2. 執行下列指令，會讀取 CSV 並在 `docs/` 目錄生成首頁與每間餐廳的頁面：
+## Getting started
+* First, ensure that node.js & npm are both installed. If not, choose your OS and installation method from [this page](https://nodejs.org/en/download/package-manager/) and follow the instructions.
+* Next, use your command line to enter your project directory.
+* This template comes with a ready-to-use package file called `package-sample.json`. You just need to rename it to `package.json`, then run `npm install` to install all of the dependencies into your project.
 
-   ```bash
-   python generate_site.py
-   ```
-
-3. 新增或修改 CSV 後，重新執行上述指令即可重新產生所有頁面。
-
-## 部署到 GitHub Pages
-
-1. 在 GitHub 專案設定的 **Pages** 中，Source 選擇 **Deploy from a branch**。
-2. Branch 選擇 `main`，資料夾選擇 `/docs`。
-3. 儲存後 GitHub 會自動部署，首頁位於 `<你的使用者名稱>.github.io/<repo 名稱>/`，每間餐廳的獨立頁面都會在 `/restaurants/<slug>/` 路徑下。
+You're ready to go! Run any task by typing `npm run task` (where "task" is the name of the task in the `"scripts"` object). The most useful task for rapid development is `watch`. It will start a new server, open up a browser and watch for any SCSS or JS changes in the `src` directory; once it compiles those changes, the browser will automatically inject the changed file(s)!
