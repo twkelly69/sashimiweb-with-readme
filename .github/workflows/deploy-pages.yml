@@ -1,0 +1,43 @@
+name: Deploy landing page to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - work
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  BUILD_DIR: public
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare static site
+        run: |
+          rm -rf $BUILD_DIR
+          mkdir -p $BUILD_DIR
+          cp index.html $BUILD_DIR/
+          cp -r dist $BUILD_DIR/
+
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.BUILD_DIR }}
+          retention-days: 7
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
